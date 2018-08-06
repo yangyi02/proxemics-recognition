@@ -18,13 +18,13 @@
 function qp_write(ex)
   global qp;
   
-  if qp.n == length(qp.a),
+  if qp.n == length(qp.a)
     return;
   end
   
   label = ex.id(1) > 0;
 
-  if label,
+  if label
     C = qp.Cpos;
   else
     C = qp.Cneg;
@@ -46,13 +46,13 @@ function qp_write(ex)
   qp.x(:,i) = 0;
   qp.x(j,i) = length(ex.blocks);
   
-  for b = ex.blocks,
+  for b = ex.blocks
     n  = numel(b.x);
     i1 = b.i;
     i2 = i1 + n - 1;
     is = i1:i2;
     x  = reshape(b.x,n,1);
-    if ~label,
+    if ~label
       x = -x;
     end
 

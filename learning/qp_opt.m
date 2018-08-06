@@ -5,7 +5,7 @@ function qp_opt(tol)
 
 global qp;
 
-if nargin < 1,
+if nargin < 1
   tol = .05;
 end
 
@@ -20,12 +20,12 @@ loss  = computeloss(slack(J),eqid);
 ub    = qp.w'*qp.w*.5 + C*loss; 
 lb    = qp.obj;
 fprintf('\n LB=%.4f,UB=%.4f [',lb,ub);
-for t = 1:100,
+for t = 1:100
   % To avoid computing upper bounds,
   % iterate until there is no improvement on the dual 
   % when starting with a full active set
   i   = inf;
-  while i > 1,
+  while i > 1
     i   = 0;
     obj = -inf;
     qp.sv(1:qp.n) = 1;
@@ -42,7 +42,7 @@ for t = 1:100,
   loss  = computeloss(slack(J),eqid);
   ub    = min(ub,qp.w'*qp.w*.5 + C*loss);  
   lb    = qp.obj;  
-  if 1 - lb/ub < tol,
+  if 1 - lb/ub < tol
     break;
   end
   %fprintf('t=%d: UB=%.5f,LB=%.5f\n',t,ub,lb);
@@ -60,13 +60,13 @@ function loss = computeloss(slack,eqid)
 % j is a ptr to the example we are considering
 
 err = logical(zeros(size(eqid)));
-for j = 1:length(err),
+for j = 1:length(err)
   % Are we at a new id?
   % If so, update i,v
-  if eqid(j) == 0,
+  if eqid(j) == 0
     i = j;
     v = slack(i);
-    if v > 0,
+    if v > 0
       err(i) = 1;
     else
       v = 0;

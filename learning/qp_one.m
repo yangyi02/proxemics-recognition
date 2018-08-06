@@ -2,7 +2,8 @@
 function qp_one
   global qp
 
-  MEX = true;
+  % MEX = true;
+  MEX = false;
    
   % Random ordering of support vectors
   I = find(qp.sv);
@@ -10,7 +11,7 @@ function qp_one
   assert(~isempty(I));
   
   % Mex file is much faster
-  if MEX,
+  if MEX
     qp_one_sparse(qp.x,qp.i,qp.b,qp.d,qp.a,qp.w,qp.noneg,qp.sv,qp.l,1,I);
   else
     sI  = sortrowsc(qp.i(:,I)',1:size(qp.i,1))';
@@ -30,20 +31,20 @@ function qp_one
     for j = sI
       i1 = I(j);
       % Increment counter if we at new id
-      if any(qp.i(:,i1) ~= qp.i(:,i0)),
+      if any(qp.i(:,i1) ~= qp.i(:,i0))
         num = num + 1;
       end
       idP(j)   = num;
       idC(num) = idC(num) + qp.a(i1);
       i0 = i1;
-      if qp.a(i1) > 0,
+      if qp.a(i1) > 0
         idI(num) = i1;
       end
     end
     assert(all(idC <= C));
     assert(all(idC >= 0));
     
-    for t = 1:n,
+    for t = 1:n
       i  = I(t);
       j  = idP(t);
       Ci = idC(j);
@@ -52,21 +53,21 @@ function qp_one
       x1 = sparse2dense(qp.x(:,i),k);
       G  = qp.w'*x1 - double(qp.b(i));
       
-      if (qp.a(i) == 0 && G >= 0) || (Ci >= C && G <= 0),
+      if (qp.a(i) == 0 && G >= 0) || (Ci >= C && G <= 0)
         PG = 0;
       else
         PG = G;
       end
 
       % Update support vector flag
-      if (qp.a(i) == 0 && G > 0),
+      if (qp.a(i) == 0 && G > 0)
         qp.sv(i) = 0;
       end
       
       % Check if we'd like to increase alpha but 
       % a) linear constraint is active (sum of alphas with this id == C) 
       % b) we've encountered another constraint with this id that we can decrease
-      if (Ci >= C && G < -1e-12 && qp.a(i) < C && idI(j) ~= i && idI(j) > 0),
+      if (Ci >= C && G < -1e-12 && qp.a(i) < C && idI(j) ~= i && idI(j) > 0)
         i2 = idI(j);
         x2 = sparse2dense(qp.x(:,i2),k);
         G2 = qp.w'*x1 - double(qp.b(i2));
@@ -75,7 +76,7 @@ function qp_one
         % Clip da to box constraints
         % da > 0: a(i) = min(a(i)+da,C),  a(i2) = max(a(i2)-da,0); 
         % da < 0: a(i) = max(a(i)+da,0),  a(i2) = min(a(i2)-da,C);
-        if da > 0,
+        if da > 0
           da = min(min(da,C-qp.a(i)),qp.a(i2));
         else
           da = max(max(da,-qp.a(i)),qp.a(i2)-C);
@@ -109,7 +110,7 @@ function qp_one
         assert(idC(j) >= 0 && idC(j) <= C);
       end
       % Record example if it can be used to satisfy a future linear constraint
-      if qp.a(i) > 0,
+      if qp.a(i) > 0
         idI(j) = i;
       end
       %fprintf('%.5f,%.5f\n',qp.a(i),qp.w(end));

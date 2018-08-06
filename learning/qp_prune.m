@@ -3,7 +3,7 @@ function n = qp_prune
 global qp
 
 % if cache is full of support vectors, only keep non-zero (and fixed) ones
-if all(qp.sv),
+if all(qp.sv)
   qp.sv = qp.a > 0;
   qp.sv(qp.svfix) = 1;
 end
@@ -15,7 +15,7 @@ assert(n > 0);
 qp.l = 0;
 qp.w = zeros(size(qp.w));
 k    = length(qp.w);
-for j = 1:n,
+for j = 1:n
   i = I(j);
   qp.x(:,j) = qp.x(:,i);
   qp.i(:,j) = qp.i(:,i);
@@ -34,5 +34,3 @@ qp.w(qp.noneg) = max(qp.w(qp.noneg),0);
 qp.obj = qp.l - qp.w'*qp.w*.5;
 qp.n   = n;
 fprintf(' Pruned to %d/%d with dual=%.4f \n',qp.n,length(qp.a),qp.obj);  
-
-

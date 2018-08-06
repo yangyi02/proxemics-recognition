@@ -20,7 +20,7 @@ catch
     end
   end
 
-  if nargin < 4 
+  if nargin < 4
     suffix = [];
   end
   save([cachedir name '_proxes_' suffix],'proxes','model');
