@@ -1,4 +1,4 @@
-function [trainset testset] = PROX_data(name,proxnum)
+function [trainset, testset] = PROX_data(name,proxnum)
 
 globals;
 
@@ -9,7 +9,7 @@ catch
 	trainfrs = [1:300 590:889]; % training frames for positive
 	testfrs = [301:589 890:1178]; % testing frames for positive
   
-  load PROXEMIC/labels.mat;
+  load data/PROXEMICS/labels.mat;
   for subnum = 1:length(PROXopts(proxnum).submix)
     touchnum(subnum) = PROXopts(proxnum).submix(subnum).touchnum;
   end
@@ -28,7 +28,7 @@ catch
         person2 = proxemic(fr).persons(j);
 				facecenter2 = mean(person2.coor(1:2,:));
         numtrain = numtrain + 1;
-        trainset(numtrain).im = ['PROXEMIC/' proxemic(fr).ims];
+        trainset(numtrain).im = ['data/PROXEMICS/' proxemic(fr).ims];
         trainset(numtrain).label = squeeze(proxemic(fr).touchlabel(i,j,touchnum));
 				trainset(numtrain).facecenter = [facecenter1; facecenter2];
         trainset(numtrain).scale = (person1.scale + person2.scale)/2;
@@ -53,7 +53,7 @@ catch
   % -------------------
   for fr = testfrs
     % load detected face
-    I = textread(sprintf('PROXEMIC/faceresults/%.4d.txt',fr));
+    I = textread(sprintf('data/PROXEMICS/faceresults/%.4d.txt',fr));
     facebox = zeros(I(1),4);
     for i = 1:I(1)
       x1 = I(i+1,1); y1 = I(i+1,2); x2 = I(i+1,3); y2 = I(i+1,4);
@@ -105,7 +105,7 @@ catch
         person2 = proxemic(fr).persons(j);
 				facecenter2 = mean(person2.coor(1:2,:));
         numtest = numtest + 1;
-        testset(numtest).im = ['PROXEMIC/' proxemic(fr).ims];
+        testset(numtest).im = ['data/PROXEMICS/' proxemic(fr).ims];
         testset(numtest).label = max(squeeze(proxemic(fr).touchlabel(i,j,touchnum)));
         testset(numtest).facecenter = [facecenter1; facecenter2];
         testset(numtest).scale = (person1.scale + person2.scale)/2;

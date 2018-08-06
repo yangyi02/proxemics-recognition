@@ -3,13 +3,13 @@ globals;
 
 proxnum = 1;
 name = PROXopts(proxnum).name;
-[trainset testset] = PROX_data(name,proxnum);
+[trainset, testset] = PROX_data(name,proxnum);
 
 % traing the proxemic model
 for subnum = 1:length(PROXopts(proxnum).submix)  
   % train every submixture
   subname = PROXopts(proxnum).submix(subnum).name;
-  [pos neg1 neg2 test] = PROXSUB_data(subname,proxnum,subnum);
+  [pos, neg1, neg2, test] = PROXSUB_data(subname,proxnum,subnum);
   model{subnum} = trainmodel(subname,pos,neg1,neg2,PROXopts(proxnum).K,PROXopts(proxnum).pa,PROXopts(proxnum).co);
   suffix = ['train_' num2str(PROXopts(proxnum).K')'];
   subproxes_train = testmodel(subname,model{subnum},trainset,suffix);
@@ -43,7 +43,7 @@ for n = 1:length(testset)
   proxes_test(n).score = max(Zt(:,n));
 end
 
-[ap prec rec] = PROX_eval_ap(proxes_test,testset);
+[ap, prec, rec] = PROX_eval_ap(proxes_test,testset);
 fprintf('ap=%.1f\n',ap*100);
 
 % test model on testing set using detected face location
@@ -63,5 +63,5 @@ for n = 1:length(testset)
   proxes_test(n).score = max(Zt(:,n));
 end
 
-[ap prec rec] = PROX_eval_ap(proxes_test,testset);
+[ap, prec, rec] = PROX_eval_ap(proxes_test,testset);
 fprintf('ap=%.1f\n',ap*100);

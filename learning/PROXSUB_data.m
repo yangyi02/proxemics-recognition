@@ -1,4 +1,4 @@
-function [pos neg1 neg2 test] = PROXSUB_data(name,proxnum,subnum)
+function [pos, neg1, neg2, test] = PROXSUB_data(name,proxnum,subnum)
 
 globals;
 
@@ -10,7 +10,7 @@ catch
 	testfrs = [301:589 890:1178]; % testing frames for positive
   trainfrs_neg = [1:300 590:889]; % training frames for negative 
   
-  load PROXEMIC/labels.mat;
+  load data/PROXEMICS/labels.mat;
   touchnum = PROXopts(proxnum).submix(subnum).touchnum;  
 	
   % -------------------
@@ -20,12 +20,12 @@ catch
 	numpos = 0;
 	for fr = trainfrs_pos
     ind = find(proxemic(fr).touchlabel(:,:,touchnum)==1);
-    [I J] = ind2sub([numel(proxemic(fr).persons) numel(proxemic(fr).persons)],ind);
+    [I, J] = ind2sub([numel(proxemic(fr).persons) numel(proxemic(fr).persons)],ind);
     for i = 1:length(I)
       person1 = proxemic(fr).persons(I(i));
       person2 = proxemic(fr).persons(J(i));
 			numpos = numpos + 1;
-			pos(numpos).im = ['PROXEMIC/' proxemic(fr).ims];
+			pos(numpos).im = ['data/PROXEMICS/' proxemic(fr).ims];
 			pos(numpos).point = [person1.coor(PROXopts(proxnum).submix(subnum).pts1,:); ...
         person2.coor(PROXopts(proxnum).submix(subnum).pts2,:)];
 			pos(numpos).scale = (person1.scale + person2.scale)/2;
@@ -51,7 +51,7 @@ catch
 	numneg = 0;
 	for fr = 615:1832 
     numneg = numneg + 1;
-    neg(numneg).im = sprintf('INRIA/%.5d.jpg',fr);
+    neg(numneg).im = sprintf('data/INRIA/%.5d.jpg',fr);
   end
   neg1 = neg;
   
@@ -59,7 +59,7 @@ catch
 	numneg = 0;
 	for fr = trainfrs_neg
     ind = find(proxemic(fr).touchlabel(:,:,touchnum)==0);
-    [I J] = ind2sub([numel(proxemic(fr).persons) numel(proxemic(fr).persons)],ind);
+    [I, J] = ind2sub([numel(proxemic(fr).persons) numel(proxemic(fr).persons)],ind);
     for i = 1:length(I)
       if I(i) == J(i), continue, end
       person1 = proxemic(fr).persons(I(i));
@@ -67,7 +67,7 @@ catch
       person2 = proxemic(fr).persons(J(i));
 			facecenter2 = mean(person2.coor(1:2,:));
       numneg = numneg + 1;
-      neg(numneg).im = ['PROXEMIC/' proxemic(fr).ims];
+      neg(numneg).im = ['data/PROXEMICS/' proxemic(fr).ims];
       neg(numneg).facecenter = [facecenter1; facecenter2];
       neg(numneg).scale = (person1.scale + person2.scale)/2;
     end
@@ -91,7 +91,7 @@ catch
   % -------------------
   for fr = testfrs
     % load detected face
-    I = textread(sprintf('PROXEMIC/faceresults/%.4d.txt',fr));
+    I = textread(sprintf('data/PROXEMICS/face_detection/%.4d.txt',fr));
     facebox = zeros(I(1),4);
     for i = 1:I(1)
       x1 = I(i+1,1); y1 = I(i+1,2); x2 = I(i+1,3); y2 = I(i+1,4);
@@ -141,7 +141,7 @@ catch
         person1 = proxemic(fr).persons(i);
         person2 = proxemic(fr).persons(j);
         numtest = numtest + 1;
-        test(numtest).im = ['PROXEMIC/' proxemic(fr).ims];
+        test(numtest).im = ['data/PROXEMICS/' proxemic(fr).ims];
         test(numtest).point = [person1.coor(PROXopts(proxnum).submix(subnum).pts1,:); ...
           person2.coor(PROXopts(proxnum).submix(subnum).pts2,:)];
         test(numtest).scale = (person1.scale + person2.scale)/2;
