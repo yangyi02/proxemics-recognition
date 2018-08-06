@@ -23,7 +23,7 @@ Acknowledgements: We graciously thank the authors of the previous code releases 
 
 ## References
 
-[1] Y. Yang, S. Baker, A. Kannan, D. Ramanan. [Recognizing Proxemics in Personal Photos]((https://yangyi02.github.io/research/proxemics/proxemics_cvpr2012.pdf). CVPR 2012.
+[1] Y. Yang, S. Baker, A. Kannan, D. Ramanan. [Recognizing Proxemics in Personal Photos](https://yangyi02.github.io/research/proxemics/proxemics_cvpr2012.pdf). CVPR 2012.
 
 [2] Y. Yang, D. Ramanan. Articulated Pose Estimation using Flexible Mixtures of Parts. CVPR 2011.
 
