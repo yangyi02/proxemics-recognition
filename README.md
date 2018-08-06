@@ -1,5 +1,5 @@
 # proxemics_recognition
-[CVPR 2012] Matlab code for Recognizing Proxemics in Personal Photos
+[CVPR 2012] Matlab code for [Recognizing Proxemics in Personal Photos](https://yangyi02.github.io/research/proxemics/proxemics_cvpr2012.pdf)
 
 ## Introduction
 
@@ -15,7 +15,7 @@ Acknowledgements: We graciously thank the authors of the previous code releases 
 
 ## Using the code
 
-1. Download the PROXMEMICS dataset(89MB) and INRIA Person dataset(59MB), put them into data/PROXEMICS and data/INRIA respectively. Or you can call `bash download_data.sh'.
+1. Download the [PROXMEMICS dataset(89MB)](https://www.dropbox.com/s/5zarkyny7ywc2fv/PROXEMICS.zip?dl=0) and [INRIA Person Background dataset(59MB)](https://www.dropbox.com/s/jtnticywxulfnq6/INRIA.zip?dl=0), put them into data/PROXEMICS and data/INRIA respectively. Or you can call `bash download_data.sh`.
 2. Start matlab
 3. Run the 'compile' script to compile the helper functions. (you may want to edit compile.m to use a different convolution  routine depending on your system)
 4. Run 'PROX_demo' to see an example of the complete system for training and detecting one particular proxemics.
