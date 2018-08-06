@@ -33,4 +33,4 @@ Acknowledgements: We graciously thank the authors of the previous code releases 
 
 [5] N. Dalal, B. Triggs. Histograms of Oriented Gradients for Human Detection. CVPR 2005.
 
-[6] Y. Yang, D. Ramanan. Articulated Human Detection with Flexible Mixtures of Parts. Submitted to PAMI.
+[6] Y. Yang, D. Ramanan. Articulated Human Detection with Flexible Mixtures of Parts. PAMI 2013.
