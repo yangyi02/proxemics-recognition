@@ -1,9 +1,8 @@
 # proxemics_recognition
-[CVPR 2012] Matlab code for [Recognizing Proxemics in Personal Photos](https://yangyi02.github.io/research/proxemics/proxemics_cvpr2012.pdf)
 
 ## Introduction
 
-This is a matlab implementation of the proxemics recognition algorithm described in [1]. It includes a completely new dataset with training, testing, evaluation and visualization code. Much of the training and detection code is built on top of flexible mixtures of part model [2] and part based model [3]. The training code implements a quadratic program (QP) solver described in [4].
+This is a matlab implementation of proxemics recognition described in [1]. It includes a completely new dataset with training, testing, evaluation and visualization code. Much of the training and detection code is built on top of flexible mixtures of part model [2] and part based model [3]. The training code implements a quadratic program (QP) solver described in [4].
 
 To illustrate the use of the training code, this package uses images from the new PROXEMICS dataset, and negative images from the INRIA Person dataset [5]. We use also include the new Percentage of Correctly Localized Keypoints (PCK) evaluation code from [6] for benchmark evaluation on pose estimation.
 
@@ -24,7 +23,7 @@ Acknowledgements: We graciously thank the authors of the previous code releases 
 
 ## References
 
-[1] Y. Yang, S. Baker, A. Kannan, D. Ramanan. Recognizing Proxemics in Personal Photos. CVPR 2012.
+[1] Y. Yang, S. Baker, A. Kannan, D. Ramanan. [Recognizing Proxemics in Personal Photos]((https://yangyi02.github.io/research/proxemics/proxemics_cvpr2012.pdf). CVPR 2012.
 
 [2] Y. Yang, D. Ramanan. Articulated Pose Estimation using Flexible Mixtures of Parts. CVPR 2011.
 
