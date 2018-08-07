@@ -2,8 +2,7 @@
 function qp_one
   global qp
 
-  % MEX = true;
-  MEX = false;
+  MEX = true;
    
   % Random ordering of support vectors
   I = find(qp.sv);
@@ -12,7 +11,7 @@ function qp_one
   
   % Mex file is much faster
   if MEX
-    qp_one_sparse(qp.x,qp.i,qp.b,qp.d,qp.a,qp.w,qp.noneg,qp.sv,qp.l,1,I);
+    qp.l = qp_one_sparse(qp.x,qp.i,qp.b,qp.d,qp.a,qp.w,qp.noneg,qp.sv,qp.l,1,I);
   else
     sI  = sortrowsc(qp.i(:,I)',1:size(qp.i,1))';
     n   = length(I);

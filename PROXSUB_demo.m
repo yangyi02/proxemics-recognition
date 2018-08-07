@@ -21,9 +21,12 @@ else
   prox.score = box(end);
 end
 figure(1);
-showboxes(im, prox, PROXopts(proxnum).color)
+showboxes(im, prox, PROXopts(proxnum).color);
 figure(2);
-showskeletons(im, prox, PROXopts(proxnum).pa, PROXopts(proxnum).color)
+showskeletons(im, prox, PROXopts(proxnum).pa, PROXopts(proxnum).color);
+
+fprintf('press any key to continue ...\n');
+keyboard;
 
 % Testing on all images with ground truth face location as the face anchor
 suffix = ['test_' num2str(PROXopts(proxnum).K')'];

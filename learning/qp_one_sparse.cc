@@ -54,7 +54,7 @@ static inline double dot(const float *x, const float *y) {
       int xp = xi + j1 - xj1;
       int yp = yi + j1 - yj1;
       for (int k=0;k < j2-j1+1;k++) {
-	res += (double)x[xp++] * (double)y[yp++];
+        res += (double)x[xp++] * (double)y[yp++];
       }
     }
     // Increment x or y pointer
@@ -202,9 +202,9 @@ void mexFunction( int nlhs, mxArray *plhs[],
       //printf("[%d,%g,%g,%d,%g,%g,%g]\n",i,A[i],G,i2,A[i2],G2,denom);
 
       if (dA > 0) {
-	dA = MIN(MIN(dA,C - A[i]),A[i2]);
+        dA = MIN(MIN(dA,C - A[i]),A[i2]);
       } else {
-	dA = MAX(MAX(dA,-A[i]),A[i2]-C);
+        dA = MAX(MAX(dA,-A[i]),A[i2]-C);
       } 
       A[i]  = A[i]  + dA;
       A[i2] = A[i2] - dA;
@@ -213,7 +213,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
       add(W, x, dA);
       add(W,x2,-dA);
       for (int d = 0; d < p; d++) {
-	W[noneg[d]-1] = MAX( W[noneg[d]-1], 0);
+        W[noneg[d]-1] = MAX(W[noneg[d]-1], 0);
       }
       //printf("[%g,%g,%g,%g,%g,%g]\n",dA,A[i],A[i2],B[i],B[i2],L[0]);
     }
@@ -228,8 +228,8 @@ void mexFunction( int nlhs, mxArray *plhs[],
       add(W,x,dA);
       // Ensure nonegativity of certain weights given by MATLAB indexing
       for (int d = 0; d < p; d++) {
-	//printf("%d,%d,%g\n",d,noneg[d]-1,W[noneg[d]-1]);
-	W[noneg[d]-1] = MAX( W[noneg[d]-1], 0);
+        //printf("%d,%d,%g\n",d,noneg[d]-1,W[noneg[d]-1]);
+        W[noneg[d]-1] = MAX( W[noneg[d]-1], 0);
       }
     }    
     //Record example if it can be used to satisfy a future linear constraint
@@ -241,5 +241,9 @@ void mexFunction( int nlhs, mxArray *plhs[],
   mxFree(idP);
   mxFree(idC);
   mxFree(idI);
+  
+  plhs[0] = mxCreateDoubleMatrix(1, 1, mxREAL);
+  double *out = (double *)mxGetPr(plhs[0]);
+  *out = *L;
 }
 
