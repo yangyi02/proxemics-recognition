@@ -27,7 +27,7 @@ Acknowledgements: We graciously thank the authors of the previous code releases 
 
 [2] Y. Yang, D. Ramanan. Articulated Pose Estimation using Flexible Mixtures of Parts. CVPR 2011.
 
-[3] P. Felzenszwalb, R. Girshick, D. McAllester. Discriminatively Trained Deformable Part Models. http://www.rossgirshick.info/latent/.
+[3] P. Felzenszwalb, R. Girshick, D. McAllester. [Discriminatively Trained Deformable Part Models](http://www.rossgirshick.info/latent/). PAMI 2010.
 
 [4] D. Ramanan. Dual Coordinate Descent Solvers for Large Structured Prediction Problems. UCI Technical Report.
 
