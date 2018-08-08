@@ -1,32 +1,27 @@
 clc; close all; clear;
 globals;
 
-proxnum = 1; subnum = 4; visualize = true;
+proxnum = 1; subnum = 3;
 name = PROXopts(proxnum).submix(subnum).name;
 
 [pos, neg1, neg2, test] = PROXSUB_data(name,proxnum,subnum);
 model = trainmodel(name,pos,neg1,neg2,PROXopts(proxnum).K,PROXopts(proxnum).pa,PROXopts(proxnum).co);
 
 % Testing on one image for illustration
-fprintf([name ': testing: %d/%d\n'],1,length(test));
-im = imread(test(1).im);
-bbox.xy = [test(1).x1 test(1).y1 test(1).x2 test(1).y2];
-bbox.force = test(1).force;
+idx = 49;
+fprintf([name ': testing: %d/%d\n'],idx,length(test));
+im = imread(test(idx).im);
+bbox.xy = [test(idx).x1 test(idx).y1 test(idx).x2 test(idx).y2];
+bbox.force = test(idx).force;
 box = detect(im,model,model.thresh,bbox,0.5);
-if isempty(box)
-  prox.xy = [];
-  prox.score = NaN;
-else
-  prox.xy = reshape(box(1:end-2),4,floor(length(box)/4))';
-  prox.score = box(end);
-end
+prox.xy = reshape(box(1:end-2),4,floor(length(box)/4))';
+prox.score = box(end);
 figure(1);
 showboxes(im, prox, PROXopts(proxnum).color);
 figure(2);
 showskeletons(im, prox, PROXopts(proxnum).pa, PROXopts(proxnum).color);
-
 fprintf('press any key to continue ...\n');
-keyboard;
+waitforbuttonpress;
 
 % Testing on all images with ground truth face location as the face anchor
 suffix = ['test_' num2str(PROXopts(proxnum).K')'];

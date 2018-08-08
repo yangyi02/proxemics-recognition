@@ -19,13 +19,13 @@ catch
 	pos = [];
 	numpos = 0;
 	for fr = trainfrs_pos
-    ind = find(proxemic(fr).touchlabel(:,:,touchnum)==1);
-    [I, J] = ind2sub([numel(proxemic(fr).persons) numel(proxemic(fr).persons)],ind);
+    ind = find(proxemics(fr).touchlabel(:,:,touchnum)==1);
+    [I, J] = ind2sub([numel(proxemics(fr).persons) numel(proxemics(fr).persons)],ind);
     for i = 1:length(I)
-      person1 = proxemic(fr).persons(I(i));
-      person2 = proxemic(fr).persons(J(i));
+      person1 = proxemics(fr).persons(I(i));
+      person2 = proxemics(fr).persons(J(i));
 			numpos = numpos + 1;
-			pos(numpos).im = ['data/PROXEMICS/' proxemic(fr).ims];
+			pos(numpos).im = ['data/PROXEMICS/' proxemics(fr).ims];
 			pos(numpos).point = [person1.coor(PROXopts(proxnum).submix(subnum).pts1,:); ...
         person2.coor(PROXopts(proxnum).submix(subnum).pts2,:)];
 			pos(numpos).scale = (person1.scale + person2.scale)/2;
@@ -58,16 +58,16 @@ catch
 	neg = [];
 	numneg = 0;
 	for fr = trainfrs_neg
-    ind = find(proxemic(fr).touchlabel(:,:,touchnum)==0);
-    [I, J] = ind2sub([numel(proxemic(fr).persons) numel(proxemic(fr).persons)],ind);
+    ind = find(proxemics(fr).touchlabel(:,:,touchnum)==0);
+    [I, J] = ind2sub([numel(proxemics(fr).persons) numel(proxemics(fr).persons)],ind);
     for i = 1:length(I)
       if I(i) == J(i), continue, end
-      person1 = proxemic(fr).persons(I(i));
+      person1 = proxemics(fr).persons(I(i));
 			facecenter1 = mean(person1.coor(1:2,:));
-      person2 = proxemic(fr).persons(J(i));
+      person2 = proxemics(fr).persons(J(i));
 			facecenter2 = mean(person2.coor(1:2,:));
       numneg = numneg + 1;
-      neg(numneg).im = ['data/PROXEMICS/' proxemic(fr).ims];
+      neg(numneg).im = ['data/PROXEMICS/' proxemics(fr).ims];
       neg(numneg).facecenter = [facecenter1; facecenter2];
       neg(numneg).scale = (person1.scale + person2.scale)/2;
     end
@@ -102,9 +102,9 @@ catch
       facebox(i,4) = (y1+y2)/2 + h*1.2/2;
     end
     % find true positive face detections
-    for i = 1:length(proxemic(fr).persons)
+    for i = 1:length(proxemics(fr).persons)
       % load ground truth face
-      person = proxemic(fr).persons(i);
+      person = proxemics(fr).persons(i);
       gtface = (person.coor(1,:) + person.coor(2,:))/2;
       x1 = gtface(1) - person.scale/2;
       y1 = gtface(2) - person.scale/2;
@@ -123,11 +123,11 @@ catch
       overlap = w.*h./repmat(area,size(facebox,1),1);
       [o,ind] = max(overlap);
       if o > 0.3
-        proxemic(fr).persons(i).detect = 1;
-        proxemic(fr).persons(i).facebox = facebox(ind,:);
+        proxemics(fr).persons(i).detect = 1;
+        proxemics(fr).persons(i).facebox = facebox(ind,:);
       else
-        proxemic(fr).persons(i).detect = 0;
-        proxemic(fr).persons(i).facebox = [];
+        proxemics(fr).persons(i).detect = 0;
+        proxemics(fr).persons(i).facebox = [];
       end
     end
   end
@@ -135,17 +135,17 @@ catch
 	test = [];
 	numtest = 0;
 	for fr = testfrs
-    for i = 1:numel(proxemic(fr).persons)
-      for j = 1:numel(proxemic(fr).persons)
+    for i = 1:numel(proxemics(fr).persons)
+      for j = 1:numel(proxemics(fr).persons)
         if i == j, continue, end
-        person1 = proxemic(fr).persons(i);
-        person2 = proxemic(fr).persons(j);
+        person1 = proxemics(fr).persons(i);
+        person2 = proxemics(fr).persons(j);
         numtest = numtest + 1;
-        test(numtest).im = ['data/PROXEMICS/' proxemic(fr).ims];
+        test(numtest).im = ['data/PROXEMICS/' proxemics(fr).ims];
         test(numtest).point = [person1.coor(PROXopts(proxnum).submix(subnum).pts1,:); ...
           person2.coor(PROXopts(proxnum).submix(subnum).pts2,:)];
         test(numtest).scale = (person1.scale + person2.scale)/2;
-        test(numtest).label = proxemic(fr).touchlabel(i,j,touchnum);
+        test(numtest).label = proxemics(fr).touchlabel(i,j,touchnum);
         if person1.detect && person2.detect
           test(numtest).facebox = NaN(length(PROXopts(proxnum).pa),4);
           test(numtest).facebox(PROXopts(proxnum).faceid(1),:) = person1.facebox;
