@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a matlab implementation of proxemics recognition described in [1]. It includes a completely new dataset with training, testing, evaluation and visualization code. Much of the training and detection code is built on top of flexible mixtures of part model [2] and part based model [3]. The training code implements a quadratic program (QP) solver described in [4].
+This is a Matlab implementation of proxemics recognition described in [1]. It includes a completely new dataset with training, testing, evaluation and visualization code. Much of the training and detection code is built on top of flexible mixtures of part model [2] and part based model [3]. The training code implements a quadratic program (QP) solver described in [4].
 
 To illustrate the use of the training code, this package uses positive images from the new PROXEMICS dataset, and negative images from the INRIA Person Background dataset [5]. We use also include the new Percentage of Correctly Localized Keypoints (PCK) evaluation code from [6] for benchmark evaluation on pose estimation.
 
