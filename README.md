@@ -6,7 +6,7 @@ This is a Matlab implementation of proxemics recognition described in [1]. It in
 
 To illustrate the use of the training code, this package uses positive images from the new PROXEMICS dataset, and negative images from the INRIA Person Background dataset [5]. We also include the new Percentage of Correctly Localized Keypoints (PCK) evaluation code from [6] for benchmark evaluation on pose estimation.
 
-Compatibility issues: The training code may require 4.5GB of memory. Uncomment/comment line 32/33 in learning/train.m to use less memory at the cost of longer training times.
+Compatibility issues: The training code may require 4.5GB of memory. Uncomment/comment line 32/33 in `learning/train.m` to use less memory at the cost of longer training times.
 
 The code also makes use of the face detection results obtained from Microsoft Research. 
 
