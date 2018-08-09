@@ -16,7 +16,7 @@ Acknowledgements: We graciously thank the authors of the previous code releases 
 
 1. Download the [PROXMEMICS dataset (89MB)](https://www.dropbox.com/s/5zarkyny7ywc2fv/PROXEMICS.zip?dl=0) and [INRIA Person Background dataset (59MB)](https://www.dropbox.com/s/jtnticywxulfnq6/INRIA.zip?dl=0), put them into `data/PROXEMICS` and `data/INRIA` respectively. Or you can simply call `bash download_data.sh` in Linux system.
 2. Start Matlab (version >2013a).
-3. Run `compile.m` to compile the helper functions. (you may also edit `compile.m` to use a different convolution routine depending on your system)
+3. Run `compile.m` to compile the helper functions. (You may also edit `compile.m` to use a different convolution routine depending on your system.)
 4. Run `PROXSUB_demo.m` to see the training and detecting one particular proxemic submixture.
 5. Or run `PROX_demo.m` to see the complete system for training and detecting one particular proxemic.
 6. By default, the code is set to output the highest-scoring detection in an image given the two people's face bounding boxes detected from a face detector.
