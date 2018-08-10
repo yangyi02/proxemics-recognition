@@ -194,7 +194,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
     if (Ci >= C && G < -1e-12 && A[i] < C && idI[j]-1 != i && idI[j] > 0) {
       int i2 = idI[j]-1;
       const float *x2 = X + k*i2;
- 
+
       double G2    = score(W,x2) - (double)B[i2];
       double denom = D[i] + D[i2] - 2*dot(x,x2);
       double dA    = -(G - G2) / denom;

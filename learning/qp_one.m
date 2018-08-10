@@ -3,7 +3,8 @@ function qp_one
   global qp
 
   MEX = true;
-   
+  %MEX = false;
+  
   % Random ordering of support vectors
   I = find(qp.sv);
   I = I(randperm(length(I)));
