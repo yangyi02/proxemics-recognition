@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This is a Matlab implementation of proxemics recognition described in [1]. It includes a completely new dataset with training, testing, evaluation and visualization code. Much of the training and detection code is built on top of flexible mixtures of part model [2] and part based model [3]. The training code implements a quadratic program (QP) solver described in [4].
+This is a Matlab implementation of proxemics recognition described in [1]. It includes a completely new dataset with training, testing, evaluation and visualization code. Much of the training and detection code is built on top of flexible mixtures-of-part model [2] and deformable part-based model [3]. The training code implements a quadratic program (QP) solver described in [4].
 
 To illustrate the use of the training code, this package uses positive images from the new PROXEMICS dataset, and negative images from the INRIA Person Background dataset [5]. We also include the new Percentage of Correctly Localized Keypoints (PCK) evaluation code from [6] for benchmark evaluation on pose estimation.
 
-Compatibility issues: The training code may require 4.5GB of memory. Modify line 32/33 in `learning/train.m` to use less memory at the cost of longer training times.
-
 The code also makes use of the face detection results obtained from Microsoft Research. 
+
+Compatibility issues: The training code may require 4.5GB of memory. Modify line 32/33 in `learning/train.m` to use less memory at the cost of longer training times.
 
 Acknowledgements: We graciously thank the authors of the previous code releases and image benchmarks for making them publically available.
 
@@ -23,14 +23,14 @@ Acknowledgements: We graciously thank the authors of the previous code releases 
 
 ## References
 
-[1] Y. Yang, S. Baker, A. Kannan, D. Ramanan. [Recognizing Proxemics in Personal Photos](https://yangyi02.github.io/research/proxemics/proxemics_cvpr2012.pdf). CVPR 2012.
+[1] Y. Yang, S. Baker, A. Kannan, D. Ramanan. [Recognizing Proxemics in Personal Photos](https://yangyi02.github.io/research/proxemics/index.html). CVPR 2012.
 
-[2] Y. Yang, D. Ramanan. Articulated Pose Estimation using Flexible Mixtures of Parts. CVPR 2011.
+[2] Y. Yang, D. Ramanan. [Articulated Pose Estimation using Flexible Mixtures of Parts](https://yangyi02.github.io/research/pose/index.html). CVPR 2011.
 
-[3] P. Felzenszwalb, R. Girshick, D. McAllester. [Discriminatively Trained Deformable Part Models](http://www.rossgirshick.info/latent/). PAMI 2010.
+[3] P. Felzenszwalb, R. Girshick, D. McAllester, D. Ramanan. [Discriminatively Trained Deformable Part Models](http://www.rossgirshick.info/latent/). PAMI 2010.
 
-[4] D. Ramanan. Dual Coordinate Descent Solvers for Large Structured Prediction Problems. UCI Technical Report.
+[4] D. Ramanan. [Dual Coordinate Descent Solvers for Large Structured Prediction Problems](https://arxiv.org/pdf/1312.1743.pdf). UCI Technical Report 2014.
 
-[5] N. Dalal, B. Triggs. Histograms of Oriented Gradients for Human Detection. CVPR 2005.
+[5] N. Dalal, B. Triggs. [Histograms of Oriented Gradients for Human Detection](http://pascal.inrialpes.fr/data/human/). CVPR 2005.
 
-[6] Y. Yang, D. Ramanan. Articulated Human Detection with Flexible Mixtures of Parts. PAMI 2013.
+[6] Y. Yang, D. Ramanan. [Articulated Human Detection with Flexible Mixtures of Parts](https://yangyi02.github.io/research/pose/index.html). PAMI 2013.
